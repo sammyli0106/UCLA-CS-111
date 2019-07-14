@@ -1,0 +1,74 @@
+NAME: Sum Yi Li
+EMAIL: sammyli0106@gmail.com
+ID: 505146702
+
+All the files in the single compressed tarball.
+Below are the descriptions of each of the file in there.
+
+1. lab0.c is a program that copies the standard input to standard output by reading
+   from file descriptor 0 until the end of the file and write to file descriptor 1.
+   If there are no errors being encountered, the programs should exit with a return
+   code of 0.
+
+   The program accepts the following command line arguments :
+
+   1) --input=filename : use the specified file as standard input (making it the new fd0).
+      If the specified file cannot be opened, then report the error and exit with code 2.
+
+   2) --output=filename : create the specified file and use as standard output (making it the new fd1).
+      If the specified file cannot be created, then report the error and exit with code 3.
+
+   3) --segfault : force a segmentation fault. If the argument is specified, then report the error
+      immediately and do not copy from stdin to stout.
+
+   4) --catch : use signal to register a SIGSEGV handler that catches the segmentation fault, then logs
+      an error message and exit with code 4.
+
+2. Makefile is a file that build the lab0 executable by default. The program is being compiled with
+   the -Wall and -Wextra options.
+
+   1) default ... : The target build the lab0 executable. In order to maximize the compile-time error
+      checking, the program is compiled with the -Wall and -Wextra options.
+
+   2) check ... : The target runs a set of smoke tests to check whether or not the program
+      works, supports the required arguments, and properly report success or failure.
+
+      The set checks included in the smoke-tests are the following :
+
+      programSuccess : The test is repsonsible to create a correctly formated
+      input file and a output file. It checks whether the program copy the content
+      from the input file to the output file successfully and exit with code 0.
+
+      unrecognArg : The test is try to run the program with a unrecognized argument
+      which is not supported in the prorgam. It checks whether the program detect the
+      unacceptable argument and exit with code 1.
+
+      badInput : The test is try to run the program with a input file that does not exsists.
+      It checks whether the program detects the bad input file and exit with code 2.
+
+      segfaultCatch : The test to check whether the program supports the segfault and catch
+      options. 
+
+   3) clean ... : The target deletes all files created by Makefile, and return the directory back
+      to the untared state.
+
+   4) dist ... : The target builds the distribution tarball.
+
+3. README is a file that with identification information, a description of the included files,
+   the smoke-test cases in the check target.
+
+4. backtrace.png : showing a segfault and associated stack-trace.
+
+5. breakpoint.png : showing a breakpoint and variable inspection.
+
+6. Reference and Resources :
+
+   File descriptor : http://web.cs.ucla.edu/~harryxu/courses/111/spring19/ProjectGuide/fd_juggling.html
+
+   Pointers : http://www.cs.fsu.edu/~myers/cgs4406/notes/pointers.html
+
+   SIGSEGV : http://www.alexonlinux.com/how-to-handle-sigsegv-but-also-generate-core-dump
+
+   long_options : https://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Option-Example.html
+
+   
