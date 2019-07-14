@@ -1,0 +1,83 @@
+NAME: Sum Yi Li
+EMAIL: sammyli0106@gmail.com
+ID: 505146702
+
+All the files in the single compressed tarball.
+Below are the descriptions of each of the file in there.
+
+1. lab1b-client.c is a program that open a connection to a server through the
+   —port=command line rather than sending directly to the shell.
+
+   The program accepts the following command line arguments :
+
+   1) —port=command line : the client should send input from the keyboard 
+      to the socket while echoing to the display, and input from the 
+      socket to the display.
+ 
+   2) —log=filename : the client maintains a record of data sent over the
+      socket. All the data written to or read from the server should be logged
+      to the specified file. The log file is being written in a specific format.
+
+   3) —compressed : enable compression of all traffic in both direction.
+      The option allow the modification for both the client and server
+      applications to compress traffic before sending it over the network
+      and decompress it after receiving it.
+
+2. Makefile is a file that build lab1b-client and lab1b-server executable by default. 
+   The program is being compiled with the -Wall and -Wextra options.
+
+   1) default ... : The target build the lab1b-client and lab1b-server executable. 
+      In order to maximize the compile-time error checking, the program is compiled  
+      with the -Wall and -Wextra options.
+
+   2) server ... : The target build the lab1b-server executable alone.
+ 
+   3) client ... : The target build the lab1b-client executable alone.
+
+   4) dist ... : The target builds the distribution tarball.
+   
+   5) clean ... : The target deletes all files created by Makefile, and 
+      return the directory back to the untared state.
+
+3. README is a file that with identification information, a description of the  
+   included files, in the check target.
+
+4. Reference and Resources :
+
+   Client script references : 
+
+   Create sockets : http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/client.c
+
+   Setting up the server address : http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/client.c
+
+   Shell exit status : http://www.tutorialspoint.com/unix_system_calls/waitpid.htm
+
+   Setting up the terminal : http://tldp.org/HOWTO/Serial-Programming-HOWTO/x115.html
+
+   Compression & decompression process tutorial : https://www.zlib.net/zlib_how.html
+
+   Poll references : http://www.unixguide.net/unix/programming/2.1.2.shtml
+
+   Long options references : https://www.gnu.org/software/libc/manual/html_node/
+   Getopt-Long-Option-Example.html
+
+   Server script references : 
+   
+   Creating pipes tutorial : https://linux.die.net/man/2/pipe
+
+   Compression & decompression process tutorial : https://www.zlib.net/zlib_how.html
+
+   Shell exit status : http://www.tutorialspoint.com/unix_system_calls/waitpid.htm
+
+   Poll references : http://www.unixguide.net/unix/programming/2.1.2.shtml
+ 
+   Setting up the sockets : https://www.tutorialspoint.com/unix_sockets/
+   socket_server_example.htm
+
+   Fork process tutorial : https://www.gnu.org/software/libc/manual/html_node/
+   Creating-a-Pipe.html
+
+   Long options references : https://www.gnu.org/software/libc/manual/html_node/
+   Getopt-Long-Option-Example.html
+
+   
