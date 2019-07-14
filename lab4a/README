@@ -1,0 +1,29 @@
+NAME: Sum Yi Li
+EMAIL: sammyli0106@gmail.com
+ID: 505146702
+
+All the files in the single compressed tarball.
+Below are the descriptions of each of the file in there.
+
+S/N : BBGW17051953
+MAC : 2CF7F106672F
+
+1. my_beaglebone.jpg is a selfie of myself holding my assembled Beaglebone.
+
+2. connected.png is a screen shot that show a USB terminal command session connected to 
+   your system and show the corresponding name and configured network access.
+
+3. copy.png is a screenshot that shows a WIFI SSH session in which you build and run a 
+   trivial (hello world) program.
+
+4. git.png is a screenshot that shows a WIFI SSH session in which you install git and 
+   clone a repository.
+
+5. Makefile is a file that build the corresponding tarball for Project 4A.
+
+6. README is a file that with identification information, a description of the  
+   included files, in the check target.
+
+
+
+   
