@@ -1,0 +1,72 @@
+Total: 773 samples
+     355  45.9%  45.9%      441  57.1% list_insert_spinLock
+     252  32.6%  78.5%      331  42.8% list_delete_spinLock
+     108  14.0%  92.5%      108  14.0% __strcmp_sse42
+      29   3.8%  96.2%       86  11.1% SortedList_insert
+      19   2.5%  98.7%       78  10.1% SortedList_lookup
+       6   0.8%  99.5%        6   0.8% lookUp_critical_section
+       2   0.3%  99.7%        2   0.3% _init
+       1   0.1%  99.9%        1   0.1% 0x00007ffed5f0e8e5
+       1   0.1% 100.0%        1   0.1% __munmap
+       0   0.0% 100.0%        1   0.1% __GI___clock_gettime
+       0   0.0% 100.0%      772  99.9% __clone
+       0   0.0% 100.0%        1   0.1% __libc_start_main
+       0   0.0% 100.0%        1   0.1% _start
+       0   0.0% 100.0%      331  42.8% deleteElement
+       0   0.0% 100.0%        1   0.1% freeMem
+       0   0.0% 100.0%      441  57.1% insertElement
+       0   0.0% 100.0%      772  99.9% list_func
+       0   0.0% 100.0%        1   0.1% main
+       0   0.0% 100.0%      772  99.9% start_thread
+ROUTINE ====================== list_func in /u/cs/ugrad/sum/cs111/project2B/lab2_list.c
+     0    772 Total samples (flat / cumulative)
+     .      .  662:     }
+     .      .  663: }
+     .      .  664: 
+     .      .  665: 
+     .      .  666: void* list_func(void* threadsID)
+---
+     .      .  667: {
+     .      .  668:     //insert element into list
+     .    441  669:     insertElement(threadsID);
+     .      .  670: 
+     .      .  671:     //get the list length
+     .      .  672:     getListLength();
+     .      .  673: 
+     .      .  674:     //looks up and deletes each of the keys it had previously inserted
+     .    331  675:     deleteElement(threadsID);
+     .      .  676:     
+     .      .  677:     return NULL;
+     .      .  678: }
+---
+     .      .  679: 
+     .      .  680: void insertString()
+     .      .  681: {
+     .      .  682:     strcat(yieldOption, "i");
+     .      .  683: }
+ROUTINE ====================== list_func in /u/cs/ugrad/sum/cs111/project2B/lab2_list.c
+     0    772 Total samples (flat / cumulative)
+     .      .  662:     }
+     .      .  663: }
+     .      .  664: 
+     .      .  665: 
+     .      .  666: void* list_func(void* threadsID)
+---
+     .      .  667: {
+     .      .  668:     //insert element into list
+     .    441  669:     insertElement(threadsID);
+     .      .  670: 
+     .      .  671:     //get the list length
+     .      .  672:     getListLength();
+     .      .  673: 
+     .      .  674:     //looks up and deletes each of the keys it had previously inserted
+     .    331  675:     deleteElement(threadsID);
+     .      .  676:     
+     .      .  677:     return NULL;
+     .      .  678: }
+---
+     .      .  679: 
+     .      .  680: void insertString()
+     .      .  681: {
+     .      .  682:     strcat(yieldOption, "i");
+     .      .  683: }

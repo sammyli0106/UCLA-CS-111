@@ -1,0 +1,200 @@
+#NAME: Sum Yi Li
+#EMAIL: sammyli0106@gmail.com
+#ID: 505146702
+———————————————————————————————————————————————————————————————————————————————————
+Questions part : 
+
+QUESTION 2.3.1 - Cycles in the basic list implementation:
+
+For the 1 and 2 thread list tests, it divide into two major categories for analyzation:
+
+In the case of 1 thread for mutex, majority of the time contributes to the list operations.
+Since it takes longer time to finish the list operations than the contention for the mutex
+among multiple threads. 
+
+In the case of 2 thread for mutex, majority of the time contributes to the list operations.
+It is because the time requires for the list operations is greater than the time it takes 
+to acquire the lock through the process of checking, locking and unlocking. 
+
+In the case of 1 thread for spin-lock, majority of the time contributes to the list operations.
+Since it takes longer time to finish the list operations than the contention for the mutex
+among multiple threads. This has the same reason as the 1 thread case for mutex. 
+
+In the case of 2 thread for spin-lock, the CPU time is roughly the same between the 
+time it takes to finish the list operations and the time it takes for contention of the locks.
+It is because when one of the thread is operating on the lists, the second thread would be
+waiting through spinning. Therefore, the time for the contention of the locks would be
+slightly greater than the time it takes for the list operations. It is because there is
+situation that it is possible that both threads could be in the process of locking and
+unlocking at the same time.
+
+The process of locking, spinning and the list operations are the most expensive parts of
+the code. It is because those operations are required to be run by all the threads 
+majority of the time from the specified list function. When we comparing expensive
+operations with simple, fast operations such as arithmetic operations and finding
+wall time operations, the simple operations are not much of a problem and concern. 
+They are overpowered by the effect of the expensive operations most of the time.
+
+When there are a large number of threads in the spin-lock tests, majority of the time
+contributes to the spinning process. It is because only one thread is able to get the
+shared resources while the rest of the threads are keep spinning and waiting for the
+release of the locks.
+
+When there are a large number of threads in the mutex tests, majority of the time
+contributes to the list operations. It is because one of the thread the has the lock 
+and consumer most of the CPU cycles to do the list operations while the rest of the 
+threads goes to sleep since they could not acquire the lock to operate yet. In this
+way, it would not end up wasting a lot of CPU cycles.
+
+
+QUESTION 2.3.2 - Execution Profiling:
+
+The code that consume the most of the cycles is the line that check for spin-locks.
+It is because the threads who are waiting to get the lock would be constantly checking
+the availability of the lock by running that specific line of code in the while loop 
+several times. The operations become more expensive with large numbers of threads because 
+there would be more threads compete for the same lock and end up waiting for
+the lock through spinning. 
+
+
+QUESTION 2.3.3 - Mutex Wait Time:
+
+As the number of contending threads increase, it means that there are a larger number of 
+threads compete for a lock. This would cause each thread spend more time waiting and spinning
+to acquire the lock.
+
+The reason that completion time per operation rise less dramatically with the number of 
+contending thread is the time it requires for a single thread to finish the list operation
+is not directly related to the number of threads running. 
+Completion time refers to the time for contention of each context switch.
+In the other case, the time it takes for a thread to wait for the lock increase 
+dramatically as the number of threads increase.
+
+For the completion time per operation, it only account the wall time of the entire operation.
+For the wait time per operation, it accounts the wall time of each separate thread.
+Since wait time of each individual thread could overlap with each other, 
+the wait time per operation increases much faster than the completion time.
+
+QUESTION 2.3.4 - Performance of Partitioned Lists
+
+If we have more sublists, it means the length of each of the sublists is shorter.
+We do not need to spend a lot of time to traverse the sublists and the probability of a single 
+list to have the contention of lock is decreased.
+
+At first, the throughput should continue increasing as the number of lists increases. 
+As it increase to a certain point, there are too many sublists that the possibility of
+contention is close to zero between threads. After that point, if the number of sublists
+continue to increase, it would just decrease the throughput. It is because there are a 
+larger number of lock operations than the ability to run in parallelism.
+
+The answer is no. As we partition a list, it decrease the length of the list and the time
+it spend within the critical section. As a result, the probability of contention for a lock
+is decreased as we increase the partition of the lists.
+
+———————————————————————————————————————————————————————————————————————————————————
+
+All the files in the single compressed tarball.
+Below are the descriptions of each of the file in there.
+
+———————————————————————————————————————————————————————————————————————————————————
+Files Part : 
+
+1. SortedList.h ... a header file (supplied by us) describing the interfaces for linked 
+   list operations.
+
+2. SortedList.c ... a C module that implements insert, delete, lookup, and length 
+   methods for a sorted doubly linked list.
+
+3. lab2_list.c ... a C program that implements the specified command line options and 
+   produces the output statistics. By using synchronized methods, the program try to run
+   multiple threads when performing list operations.
+
+4. Makefile ... Build the deliverable programs (lab2_list), output, graphs, 
+   and tarball.
+
+5. lab2b_list.csv ... containing all of your results for all of the Part-2 tests.
+
+6. lab2b_1.png ... throughput vs. number of threads for mutex and spin-lock synchronized list operations.
+
+7. lab2b_2.png ... mean time per mutex wait and mean time per operation for mutex-synchronized list operations.
+
+8. lab2b_3.png ... successful iterations vs. threads for each synchronization method.
+
+9. lab2b_4.png ... throughput vs. number of threads for mutex synchronized partitioned lists.
+
+10. lab2b_5.png ... throughput vs. number of threads for spin-lock-synchronized partitioned lists.
+
+11. README ... descriptions of each of the included files and any other information about 
+    the submission and brief answers to the questions. 
+
+———————————————————————————————————————————————————————————————————————————————————
+Resources Part: 
+
+1. Insert elements into linked list : 
+   https://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-
+   insert-in-sorted-way/
+
+2. Delete elements from linked list : 
+   https://www.geeksforgeeks.org/linked-list-set-3-deleting-node/
+
+3. Search for specific element in linked list : 
+   https://www.geeksforgeeks.org/search-an-element-in-a-linked-list-iterative-and-
+   recursive/
+
+4. Find the length of the linked list :
+   https://www.geeksforgeeks.org/find-length-of-a-linked-list-iterative-and-
+   recursive/ 
+
+5. Do options in getopt_long : 
+   https://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Option-Example.html
+
+6. Use clock get time : 
+   https://www.cs.rutgers.edu/~pxk/416/notes/c-tutorials/gettime.html
+
+7. Dynamically malloc for threads : 
+   https://stackoverflow.com/questions/26753957/how-to-dynamically-
+   allocateinitialize-a-pthread-array
+
+8. Calculate the execution time of the program : 
+   https://stackoverflow.com/questions/5248915/execution-time-of-c-program
+
+9. Use pthread_create : 
+   https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
+
+10. Initialize the pthread mutex : 
+   https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
+
+11. Use pthread_join : 
+   https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
+
+12. Compare and swap lock : 
+    http://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf
+
+13. Use of spin lock : 
+    https://attractivechaos.wordpress.com/2011/10/06/multi-threaded-programming-
+    efficiency-of-locking/
+
+14. Handle signal : 
+    https://www.geeksforgeeks.org/signals-c-language/
+
+15. Generic linked list create and initialize : 
+    https://www.geeksforgeeks.org/generic-linked-list-in-c-2/
+
+16. Generate random keys : 
+    https://stackoverflow.com/questions/19724346/generate-random-characters-in-c
+
+17. Using srand to generate unique keys : 
+    https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
+
+18. Hash functions : 
+    http://www.cse.yorku.ca/~oz/hash.html
+
+
+    
+   
+
+
+
+
+
+   
