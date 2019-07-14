@@ -1,0 +1,197 @@
+#NAME: Sum Yi Li
+#EMAIL: sammyli0106@gmail.com
+#ID: 505146702
+———————————————————————————————————————————————————————————————————————————————————
+Questions part : 
+
+Questions 2.1.1 - causing conflicts:
+
+The reason that it takes many iterations before errors are seen is every single
+thread is able to finish executing the assigned functions in a given time slice
+in a small number of iterations.
+
+For smaller number of iterations, threads are able to finish the assigned
+work faster than the process of creating the thread. They are able to complete
+the function within an assigned time slice. Therefore, it is seldom fail. 
+
+Questions 2.1.2 - cost of yielding:
+
+The reason that —yield run so much slower is due to the performance of context switch.
+When program run the ‘—yield’ option and later invoke the ‘sched_yield’ function call,
+it requires time to stop the current running thread and switching to run a new thread. 
+
+The additional time is going towards the context switch between threads.
+
+No, we cannot get valid per-operation timings. Since we only have the wall time
+available to us. There is situation that several yield functions could run at
+the same time and we would not be able to record the time that contribute to
+context switch.
+
+Questions 2.1.3 - measurement errors:
+
+The reason that average cost per operation drop with increasing iterations is
+the increasing iterations overpower the effect of overhead for the process of 
+creating the thread. This means that the large number of fast iterations reduce the effect of the overhead of creating new threads.
+
+According to the generated plot, the average cost per iteration decreases exponentially.
+When the graph decrease to a point that stabilizes and does not drop significantly, 
+this is the point that indicates a “correct” cost for the number of iterations to run.
+
+Questions 2.1.4 - costs of serialization:
+
+The options perform similarly for low numbers of threads because there are less
+conflict, overheads, lock contention in critical section for a low number of 
+threads. Therefore, they would perform similarly.
+
+As the number of threads rises, the lock contention happens more often.
+This means that each thread need to spend a significant amount of time
+waiting for the acquired lock in order to perform the operations.
+
+QUESTION 2.2.1 - scalability of Mutex
+
+For Part 1 (adds), as the number of threads increase, the number in time per
+mutex-protected operation also increases. It is because there are more lock
+contention for entering the critical section with large number of threads.
+
+For Part 2 (list), the rate of per operation cost increase is bigger.
+The reason is the list operations(such as insertion, deletion, lookup) require more 
+synchronization than the add function in Part 1. Therefore, each thread would
+likely to spend more time to wait to acquire the lock.
+
+QUESTION 2.2.2 - scalability of spin locks
+
+Compare the variation in time per protected operation vs the number of threads for list operations protected by Mutex vs Spin locks. Comment on the general shapes of the curves, and explain why they have this shape.
+Comment on the relative rates of increase and differences in the shapes of the curves, and offer an explanation for these differences.
+ 
+In the case of having lower number of threads, the cost of spin locks cost
+less than mutexes. As the number of threads increases, the cost of spin locks 
+significantly cost more than the mutexes since there are more threads compete
+for the lock. Therefore, the growth rate of the cost per operation of spin locks
+increase faster than the growth rate for mutexes. 
+
+In the context of mutex, threads are not wasting CPU cycles by putting themselves
+to sleep and wake up when it is time for them to run.
+
+In the context of spin locks, threads would end up wasting a significantly amount of
+CPU cycles since they are constantly checking to acquire the lock. 
+
+All the files in the single compressed tarball.
+Below are the descriptions of each of the file in there.
+
+———————————————————————————————————————————————————————————————————————————————————
+Files Part : 
+
+1.  lab2_add.c ... a C program that implements and tests a shared variable add function.
+
+2.  SortedList.h ... a header file (supplied by us) describing the interfaces for linked 
+    list operations.
+
+3.  SortedList.c ... a C module that implements insert, delete, lookup, and length 
+    methods for a sorted doubly linked list.
+
+4.  lab2_list.c ... a C program that implements the specified command line options and 
+    produces the output statistics. By using synchronized methods, the program try to run
+    multiple threads when performing list operations.
+
+5.  Makefile ... Build the deliverable programs (lab2_add and lab2_list), output, graphs, 
+    and tarball.
+
+6.  lab2_add.csv ... containing all of your results for all of the Part-1 tests.
+
+7.  lab2_list.csv ... containing all of your results for all of the Part-2 tests.
+
+8.  lab2_add-1.png ... threads and iterations required to generate a failure (with and   
+    without yields).
+
+9.  lab2_add-2.png ... average time per operation with and without yields.
+
+10. lab2_add-3.png ... average time per (single threaded) operation vs. the number of 
+    iterations.
+
+11. lab2_add-4.png ... threads and iterations that can run successfully with yields under 
+    each of the synchronization options.
+
+12. lab2_add-5.png ... average time per (protected) operation vs. the number of threads.
+
+13. lab2_list-1.png ... average time per (single threaded) unprotected operation vs. 
+    number of iterations. 
+
+14. lab2_list-2.png ... threads and iterations required to generate a failure (with and 
+    without yields).
+
+15. lab2_list-3.png ... iterations that can run (protected) without failure.
+
+16. lab2_list-4.png ... (length-adjusted) cost per operation vs the number of threads for 
+    the various synchronization options.
+
+17. README ... descriptions of each of the included files and any other information about 
+    the submission and brief answers to the questions. 
+
+———————————————————————————————————————————————————————————————————————————————————
+Resources Part: 
+
+1. Insert elements into linked list : 
+   https://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-
+   insert-in-sorted-way/
+
+2. Delete elements from linked list : 
+   https://www.geeksforgeeks.org/linked-list-set-3-deleting-node/
+
+3. Search for specific element in linked list : 
+   https://www.geeksforgeeks.org/search-an-element-in-a-linked-list-iterative-and-
+   recursive/
+
+4. Find the length of the linked list :
+   https://www.geeksforgeeks.org/find-length-of-a-linked-list-iterative-and-
+   recursive/ 
+
+5. Do options in getopt_long : 
+   https://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Option-Example.html
+
+6. Use clock get time : 
+   https://www.cs.rutgers.edu/~pxk/416/notes/c-tutorials/gettime.html
+
+7. Dynamically malloc for threads : 
+   https://stackoverflow.com/questions/26753957/how-to-dynamically-
+   allocateinitialize-a-pthread-array
+
+8. Calculate the execution time of the program : 
+   https://stackoverflow.com/questions/5248915/execution-time-of-c-program
+
+9. Use pthread_create : 
+   https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
+
+10. Initialize the pthread mutex : 
+   https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
+
+11. Use pthread_join : 
+   https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
+
+12. Compare and swap lock : 
+    http://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf
+
+13. Use of spin lock : 
+    https://attractivechaos.wordpress.com/2011/10/06/multi-threaded-programming-
+    efficiency-of-locking/
+
+14. Handle signal : 
+    https://www.geeksforgeeks.org/signals-c-language/
+
+15. Generic linked list create and initialize : 
+    https://www.geeksforgeeks.org/generic-linked-list-in-c-2/
+
+16. Generate random keys : 
+    https://stackoverflow.com/questions/19724346/generate-random-characters-in-c
+
+17. Using srand to generate unique keys : 
+    https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
+
+
+    
+   
+
+
+
+
+
+   
